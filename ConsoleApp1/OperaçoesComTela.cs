@@ -14,7 +14,7 @@ namespace Xadrez_Game
                 {
                     if (tab.RetornaPeca(i, j) == null)
                     {
-                        Console.WriteLine("- ");
+                        Console.Write("- ");
                     }
                     else
                     {

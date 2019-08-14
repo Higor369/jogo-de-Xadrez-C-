@@ -9,12 +9,12 @@ namespace Xadrez_Game.Tabuleiro
         public Posicao posicao { get; set; }
         public Cores cor { get; protected set; }
         public int quantidadeDeMovimentos { get; set; }
-        
+        public TabuleiroDoJogo tabuleiro { get; set; }
         
 
-        public Peca(Posicao posicao, Cores cor, TabuleiroDoJogo tabuleiro)
+        public Peca( Cores cor, TabuleiroDoJogo tabuleiro)
         {
-            this.posicao = posicao;
+            this.posicao = null;
             this.cor = cor;
             this.tabuleiro = tabuleiro;
             this.quantidadeDeMovimentos = 0;
