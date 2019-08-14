@@ -16,5 +16,9 @@ namespace Xadrez_Game.Tabuleiro
             this.colunas = colunas;
             this.pecas = new Peca[linhas, colunas];
         }
+        public Peca RetornaPeca(int linha, int coluna)
+        {
+            return pecas[linha, coluna];
+        }
     }
 }

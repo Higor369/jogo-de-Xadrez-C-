@@ -9,7 +9,8 @@ namespace Xadrez_Game.Tabuleiro
         public Posicao posicao { get; set; }
         public Cores cor { get; protected set; }
         public int quantidadeDeMovimentos { get; set; }
-        public TabuleiroDoJogo tabuleiro { get; protected set; }
+        
+        
 
         public Peca(Posicao posicao, Cores cor, TabuleiroDoJogo tabuleiro)
         {
@@ -18,5 +19,7 @@ namespace Xadrez_Game.Tabuleiro
             this.tabuleiro = tabuleiro;
             this.quantidadeDeMovimentos = 0;
         }
+        
+
     }
 }
