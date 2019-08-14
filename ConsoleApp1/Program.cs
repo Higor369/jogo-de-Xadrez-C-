@@ -8,9 +8,17 @@ namespace Xadrez_Game
     {
         static void Main(string[] args)
         {
-            TabuleiroDoJogo tab = new TabuleiroDoJogo(8,8);
-            tab.ColocarPeca(new Torre(Cores.Preta,tab) , new Posicao(0, 0));
-            OperaçoesComTela.ImprimeTabuleiro(tab);
+            try
+            {
+                TabuleiroDoJogo tab = new TabuleiroDoJogo(8, 8);
+                tab.ColocarPeca(new Torre(Cores.Preta, tab), new Posicao(0, 0));
+                OperaçoesComTela.ImprimeTabuleiro(tab);
+
+            }
+            catch (TabuleiroExption e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
             Console.ReadLine();
         }
