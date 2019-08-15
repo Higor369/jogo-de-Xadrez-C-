@@ -6,7 +6,7 @@ namespace Xadrez_Game.Tabuleiro
 {
     class TabuleiroExption : Exception
     {
-        public TabuleiroExption(string msg) : base(msg)
+        public TabuleiroExption(string msg) : base(msg) // execao personalizada 
         {
 
         }

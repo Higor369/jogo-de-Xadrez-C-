@@ -19,5 +19,10 @@ namespace Xadrez_Game.Tabuleiro
         {
             return Linha + ", " + Coluna;
         }
+        public void DefinirValores(int linha, int coluna)
+        {
+            this.Linha = linha;
+            this.Coluna = coluna;
+        }
     }
 }

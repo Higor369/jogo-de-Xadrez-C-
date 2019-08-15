@@ -20,7 +20,7 @@ namespace Xadrez_Game.Tabuleiro
         {
             return pecas[linha, coluna];
         }
-        public void ColocarPeca(Peca p, Posicao pos)
+        public void ColocarPeca(Peca p, Posicao pos) //coloca uma peça se a posicao estiver valida 
         {
             if (ExistePeca(pos))
             {
@@ -29,13 +29,13 @@ namespace Xadrez_Game.Tabuleiro
             pecas[pos.Linha, pos.Coluna] = p;
             p.posicao = pos;
         }
-        public Peca peca(Posicao pos)
+        public Peca peca(Posicao pos) // retorna a peça na posicao informada 
         {
             return pecas[pos.Linha, pos.Coluna];
         }
         public bool PosicaoValida(Posicao pos)
         {
-            if (pos.Linha < 0 || pos.Linha > linhas || pos.Coluna<0 || pos.Coluna >= colunas)
+            if (pos.Linha < 0 || pos.Linha > linhas || pos.Coluna<0 || pos.Coluna >= colunas) // delimita as bordas do tabuleiro
             {
                 return false;
             }
@@ -51,9 +51,9 @@ namespace Xadrez_Game.Tabuleiro
         public bool ExistePeca(Posicao pos)
         {
             ValidaPossicao(pos);
-            return peca(pos) != null;
+            return peca(pos) != null; // valida se a posicao existe e se existe peça na posicao informada 
         }
-        public Peca RetirarPeca(Posicao pos)
+        public Peca RetirarPeca(Posicao pos) 
         {
             if (peca(pos) == null)
             {
