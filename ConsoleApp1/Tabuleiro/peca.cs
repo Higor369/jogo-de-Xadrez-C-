@@ -19,7 +19,10 @@ namespace Xadrez_Game.Tabuleiro
             this.tabuleiro = tabuleiro;
             this.quantidadeDeMovimentos = 0;
         }
-        
+        public void IncrementaMovimento()
+        {
+            quantidadeDeMovimentos++;
+        }
 
     }
 }
