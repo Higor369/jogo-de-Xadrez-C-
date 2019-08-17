@@ -42,6 +42,9 @@ namespace Xadrez_Game
                         Console.ReadLine();
                     }
                 }
+                Console.Clear();
+                OperaçoesComTela.ImprimePartida(partida);
+
             }
             catch (TabuleiroExption e)
             {

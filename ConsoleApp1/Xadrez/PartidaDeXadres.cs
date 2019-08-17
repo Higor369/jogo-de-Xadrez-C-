@@ -143,7 +143,7 @@ namespace Xadrez_Game.Xadrez
         }
         public void ValidaPosicaoDestiono(Posicao origem, Posicao destino)
         {
-            if (!tab.peca(origem).PodeMoverPara(destino))
+            if (!tab.peca(origem).movimentoPossivel(destino))
             {
                 throw new TabuleiroExption("Possicao de destino Invalida");
             }
@@ -204,10 +204,11 @@ namespace Xadrez_Game.Xadrez
                     {
                         if (mat[i, j] == true) //se existe movimento possivel para essa casa
                         {
+                            Posicao origem = peca.posicao;
                             Posicao destino = new Posicao(i, j);
-                            Peca pecaCapturada = ExecutaMovimento(peca.posicao, destino); //descolca a peça para a casa
+                            Peca pecaCapturada = ExecutaMovimento(origem, destino); //descolca a peça para a casa
                             bool testaXeque = EstaEmXeque(cor); //e valida se ainda está em xeque
-                            DesfazMovimento(peca.posicao, destino, pecaCapturada);
+                            DesfazMovimento(origem, destino, pecaCapturada);
                             if (!testaXeque) // se ele nao estiver em xeque depois disso , retorna falso, não esta em xequemate 
                             {
                                 return false;

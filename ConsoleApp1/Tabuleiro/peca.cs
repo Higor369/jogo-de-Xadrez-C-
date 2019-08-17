@@ -44,7 +44,7 @@ namespace Xadrez_Game.Tabuleiro
             }
             return false;
         }
-        public bool PodeMoverPara(Posicao pos)
+        public bool movimentoPossivel(Posicao pos)
         {
             return MovimentosPossieis()[pos.Linha, pos.Coluna];
         }
