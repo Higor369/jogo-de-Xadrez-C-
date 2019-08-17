@@ -8,49 +8,80 @@ namespace Xadrez_Game
 {
     class OperaçoesComTela
     {
-        public static void ImprimeTabuleiro(TabuleiroDoJogo tab)// varre a matriz e imprime o tabuleiro 
+        public static void ImprimeTabuleiro(TabuleiroDoJogo tab)// varre a matriz e imprime o tabuleiro sem posicoes possiveis 
         {
             for (int i = 0; i < tab.linhas; i++)
             {
                 Console.Write(8 - i + " ");
                 for (int j = 0; j < tab.colunas; j++)
                 {
-                    if (tab.RetornaPeca(i, j) == null) 
-                    {
-                        Console.Write("- "); // se não tem peça ganha um traço 
-                    }
-                    else
-                    {
-                        OperaçoesComTela.ImprimirPeca(tab.RetornaPeca(i,j)); // se tiver, ganha a peça 
-                        Console.Write(" ");
-                    }
+                    ImprimirPeca(tab.RetornaPeca(i, j));
+
                 }
+
                 Console.WriteLine();
             }
             Console.WriteLine("  a b c d e f g h");
+        }
+        public static void ImprimeTabuleiro(TabuleiroDoJogo tab, bool[,] posicoesPossiveis)// varre a matriz e imprime o tabuleiro com posicoes possiveis 
+        {
+            ConsoleColor fundoO = Console.BackgroundColor;
+            ConsoleColor fundoD = ConsoleColor.DarkGray;
+            for (int i = 0; i < tab.linhas; i++)
+            {
+                Console.Write(8 - i + " ");
+                for (int j = 0; j < tab.colunas; j++)
+                {
+                    if (posicoesPossiveis[i,j])
+                    {
+                        Console.BackgroundColor = fundoD;
+
+                    }
+                    else
+                    {
+                        Console.BackgroundColor = fundoO;
+                    }
+
+                    ImprimirPeca(tab.RetornaPeca(i, j));
+                    Console.BackgroundColor = fundoO;
+                }
+
+                Console.WriteLine();
+            }
+            Console.WriteLine("  a b c d e f g h");
+            Console.BackgroundColor = fundoO;
 
         }
 
         public static void ImprimirPeca(Peca peca)
         {
-            if (peca.cor == Cores.Branca)
+            if (peca == null)
             {
-      
-                Console.WriteLine(peca);
+                Console.Write("- "); // se não tem peça ganha um traço 
             }
-            else
+            else // se tiver peça na posicao informada, ela será impressa 
             {
-                ConsoleColor aux = Console.ForegroundColor; // altera a cor das peças pretas 
-                Console.ForegroundColor = ConsoleColor.DarkGreen; // cor verde escura 
-                Console.WriteLine(peca);
-                Console.ForegroundColor = aux;
+                if (peca.cor == Cores.Branca)
+                {
+
+                    Console.Write(peca);
+                }
+                else
+                {
+                    ConsoleColor aux = Console.ForegroundColor; // altera a cor das peças pretas 
+                    Console.ForegroundColor = ConsoleColor.DarkGreen; // cor verde escura 
+                    Console.Write(peca);
+                    Console.ForegroundColor = aux;
+                }
+                Console.Write(" "); // se não tem peça ganha um traço
             }
+
         }
         public static PosicaoXadrex LerPosicaoTeclado()
         {
             string s = Console.ReadLine();
             char coluna = s[0];
-            int linha = int.Parse(s[1] + "");
+            int linha = (int)Char.GetNumericValue(s[1]);
             return new PosicaoXadrex(coluna, linha); // converte as coordenas digitadas em coordenadas da matriz
         }
     }

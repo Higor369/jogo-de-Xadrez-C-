@@ -14,6 +14,7 @@ namespace Xadrez_Game.Xadrez
 
         private bool PodeMover(Posicao pos)
         {
+            
             Peca p = tabuleiro.RetornaPeca(pos.Linha, pos.Coluna);
             return p == null || p.cor != this.cor; // valida se existe peça adversaria ou espaço em branco na posicao, se sim, pode mover 
         }
@@ -33,7 +34,7 @@ namespace Xadrez_Game.Xadrez
                 {
                     break; // interrompe a iteraçao após encontrar uma peça de outra cor 
                 }
-                pos.Linha = pos.Linha - 1;
+                pos.Linha = pos.Linha -1;
             }
 
             // sul
@@ -57,7 +58,7 @@ namespace Xadrez_Game.Xadrez
                 {
                     break; // interrompe a iteraçao após encontrar uma peça de outra cor 
                 }
-                pos.Linha = pos.Coluna + 1;
+                pos.Coluna = pos.Coluna + 1;
             }
 
             // oeste 
@@ -69,7 +70,7 @@ namespace Xadrez_Game.Xadrez
                 {
                     break; // interrompe a iteraçao após encontrar uma peça de outra cor 
                 }
-                pos.Linha = pos.Coluna - 1;
+                pos.Coluna = pos.Coluna - 1;
             }
 
             return matTemp;

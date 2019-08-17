@@ -23,6 +23,7 @@ namespace Xadrez_Game.Xadrez
 
         public Posicao ConvertePosicao()
         {
+            
             return new Posicao(8-linha,coluna - 'a'); // cloca as linhas de forma decresente, como no xadez , e o char para o int correspondente
                                                       // char 'a' para int é 1, 1- coluna deixa as linhas de 0 a 7 como na matriz 
                                                                                  

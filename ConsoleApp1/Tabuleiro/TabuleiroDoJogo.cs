@@ -35,11 +35,12 @@ namespace Xadrez_Game.Tabuleiro
         }
         public bool PosicaoValida(Posicao pos)
         {
-            if (pos.Linha < 0 || pos.Linha > linhas || pos.Coluna<0 || pos.Coluna >= colunas) // delimita as bordas do tabuleiro
+            if (pos.Linha < 0 || pos.Linha >= linhas || pos.Coluna < 0 || pos.Coluna >= colunas) // delimita as bordas do tabuleiro
             {
                 return false;
             }
-            return true;
+            else { return true; }
+               
         }
         public void ValidaPossicao(Posicao pos)
         {

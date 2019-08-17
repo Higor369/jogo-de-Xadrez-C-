@@ -8,10 +8,35 @@ namespace Xadrez_Game
     {
         static void Main(string[] args)
         {
-            PosicaoXadrex pos = new PosicaoXadrex('a', 1);
+            try
+            {
+                PartidaDeXadres partida = new PartidaDeXadres();
 
-            Console.WriteLine(pos);
-            Console.ReadLine();
+                while (!partida.terminada)
+                {
+                    Console.Clear();
+                    OperaçoesComTela.ImprimeTabuleiro(partida.tab);
+
+                    Console.WriteLine();
+                    Console.WriteLine("Digite a Peça de Origem: ");
+                    Posicao origem = OperaçoesComTela.LerPosicaoTeclado().ConvertePosicao();
+                    Console.WriteLine(origem);
+
+                    bool[,] possicoesPossiceis = partida.tab.peca(origem).MovimentosPossieis();
+
+                    Console.Clear();
+                    OperaçoesComTela.ImprimeTabuleiro(partida.tab, possicoesPossiceis);
+
+                    Console.WriteLine("Digite a posição de Destino da Peça selecionada: ");
+                    Posicao destino = OperaçoesComTela.LerPosicaoTeclado().ConvertePosicao();
+
+                    partida.ExecutaMovimento(origem, destino);
+                }
+            }
+            catch (TabuleiroExption e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
