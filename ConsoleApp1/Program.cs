@@ -14,23 +14,36 @@ namespace Xadrez_Game
 
                 while (!partida.terminada)
                 {
-                    Console.Clear();
-                    OperaçoesComTela.ImprimeTabuleiro(partida.tab);
+                    try
+                    {
+                        Console.Clear();
+                        OperaçoesComTela.ImprimeTabuleiro(partida.tab);
+                        Console.WriteLine();
+                        Console.WriteLine($" turno: {partida.turno} \n Jogador atual: {partida.jogadorAtual}");
 
-                    Console.WriteLine();
-                    Console.WriteLine("Digite a Peça de Origem: ");
-                    Posicao origem = OperaçoesComTela.LerPosicaoTeclado().ConvertePosicao();
-                    Console.WriteLine(origem);
+                        Console.WriteLine("\n Digite a Peça de Origem: ");
+                        Posicao origem = OperaçoesComTela.LerPosicaoTeclado().ConvertePosicao();
+                        Console.WriteLine(origem);
+                        partida.ValidarPosicaoOrigem(origem);
 
-                    bool[,] possicoesPossiceis = partida.tab.peca(origem).MovimentosPossieis();
 
-                    Console.Clear();
-                    OperaçoesComTela.ImprimeTabuleiro(partida.tab, possicoesPossiceis);
+                        bool[,] possicoesPossiceis = partida.tab.peca(origem).MovimentosPossieis();
 
-                    Console.WriteLine("Digite a posição de Destino da Peça selecionada: ");
-                    Posicao destino = OperaçoesComTela.LerPosicaoTeclado().ConvertePosicao();
+                        Console.Clear();
+                        OperaçoesComTela.ImprimeTabuleiro(partida.tab, possicoesPossiceis);
 
-                    partida.ExecutaMovimento(origem, destino);
+                        Console.WriteLine("Digite a posição de Destino da Peça selecionada: ");
+                        Posicao destino = OperaçoesComTela.LerPosicaoTeclado().ConvertePosicao();
+                        partida.ValidaPosicaoDestiono(origem, destino);
+
+                        partida.RealizaJogada(origem, destino);
+                    }
+                    catch (TabuleiroExption e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.WriteLine("Tecle enter para realizar uma nova jogada");
+                        Console.ReadLine();
+                    }
                 }
             }
             catch (TabuleiroExption e)

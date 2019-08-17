@@ -24,7 +24,26 @@ namespace Xadrez_Game.Tabuleiro
             quantidadeDeMovimentos++;
         }
         public abstract bool[,] MovimentosPossieis();
-       
+
+        public bool ExisteMovPossivel() // havalia se tem ao menos um movimento possivel para a peça
+        {
+            bool[,] mat = MovimentosPossieis();
+            for (int i = 0; i < tabuleiro.linhas; i++)
+            {
+                for (int j = 0; j < tabuleiro.colunas; j++)
+                {
+                    if (mat[i, j] == true)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        public bool PodeMoverPara(Posicao pos)
+        {
+            return MovimentosPossieis()[pos.Linha, pos.Coluna];
+        }
 
         
 
