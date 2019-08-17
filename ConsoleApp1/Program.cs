@@ -16,10 +16,7 @@ namespace Xadrez_Game
                 {
                     try
                     {
-                        Console.Clear();
-                        OperaçoesComTela.ImprimeTabuleiro(partida.tab);
-                        Console.WriteLine();
-                        Console.WriteLine($" turno: {partida.turno} \n Jogador atual: {partida.jogadorAtual}");
+                        OperaçoesComTela.ImprimePartida(partida);
 
                         Console.WriteLine("\n Digite a Peça de Origem: ");
                         Posicao origem = OperaçoesComTela.LerPosicaoTeclado().ConvertePosicao();

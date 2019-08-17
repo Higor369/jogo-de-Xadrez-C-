@@ -48,7 +48,7 @@ namespace Xadrez_Game
 
                 Console.WriteLine();
             }
-            Console.WriteLine("  a b c d e f g h");
+            Console.WriteLine("  a b c d e f g h \n");
             Console.BackgroundColor = fundoO;
 
         }
@@ -84,5 +84,31 @@ namespace Xadrez_Game
             int linha = (int)Char.GetNumericValue(s[1]);
             return new PosicaoXadrex(coluna, linha); // converte as coordenas digitadas em coordenadas da matriz
         }
+        public static void ImprimePartida(PartidaDeXadres partida)
+        {
+            Console.Clear();
+            ImprimeTabuleiro(partida.tab);
+            ImprimirPecasCapturadas(partida);
+            Console.WriteLine();
+            Console.WriteLine($" turno: {partida.turno} \n Jogador atual: {partida.jogadorAtual}");
+        }
+        public static void ImprimirPecasCapturadas(PartidaDeXadres partida)
+        {
+            Console.WriteLine("Pecas Capturadas");
+            Console.WriteLine("Brancas:");
+            ImprimirConjunto(partida.PecasCapturadas(Cores.Branca));
+            Console.WriteLine("Pretas:");
+            ImprimirConjunto(partida.PecasCapturadas(Cores.Branca));
+        }
+        public static void ImprimirConjunto(HashSet<Peca> conjunto)
+        {
+            Console.Write("[");
+            foreach(Peca x in conjunto)
+            {
+                Console.Write(x + " ");
+            }
+            Console.Write("] \n");
+        }
+
     }
 }

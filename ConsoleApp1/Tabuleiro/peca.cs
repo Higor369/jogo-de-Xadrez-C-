@@ -23,6 +23,10 @@ namespace Xadrez_Game.Tabuleiro
         {
             quantidadeDeMovimentos++;
         }
+        public void DecrementarMovimento()
+        {
+            quantidadeDeMovimentos--;
+        }
         public abstract bool[,] MovimentosPossieis();
 
         public bool ExisteMovPossivel() // havalia se tem ao menos um movimento possivel para a peça
