@@ -16,45 +16,45 @@ namespace Xadrez_Game.Tabuleiro
             this.colunas = colunas;
             this.pecas = new Peca[linhas, colunas];
         }
-        public Peca RetornaPeca(int linha, int coluna)
+        public Peca retornaPeca(int linha, int coluna)
         {
             return pecas[linha, coluna];
         }
-        public void ColocarPeca(Peca p, Posicao pos) //coloca uma peça se a posicao estiver valida 
+        public void colocarPeca(Peca p, Posicao pos) //coloca uma peça se a posicao estiver valida 
         {
-            if (ExistePeca(pos))
+            if (existePeca(pos))
             {
-                throw new TabuleiroExption("Já existe uma peça aqui");
+                throw new TabuleiroException("Já existe uma peça aqui");
             }
-            pecas[pos.Linha, pos.Coluna] = p;
+            pecas[pos.linha, pos.coluna] = p;
             p.posicao = pos;
         }
         public Peca peca(Posicao pos) // retorna a peça na posicao informada 
         {
-            return pecas[pos.Linha, pos.Coluna];
+            return pecas[pos.linha, pos.coluna];
         }
-        public bool PosicaoValida(Posicao pos)
+        public bool posicaoValida(Posicao pos)
         {
-            if (pos.Linha < 0 || pos.Linha >= linhas || pos.Coluna < 0 || pos.Coluna >= colunas) // delimita as bordas do tabuleiro
+            if (pos.linha < 0 || pos.linha >= linhas || pos.coluna < 0 || pos.coluna >= colunas) // delimita as bordas do tabuleiro
             {
                 return false;
             }
             else { return true; }
                
         }
-        public void ValidaPossicao(Posicao pos)
+        public void validaPossicao(Posicao pos)
         {
-            if (!PosicaoValida(pos))
+            if (!posicaoValida(pos))
             {
-                throw new TabuleiroExption("Posição invalida!");
+                throw new TabuleiroException("Posição invalida!");
             }
         }
-        public bool ExistePeca(Posicao pos)
+        public bool existePeca(Posicao pos)
         {
-            ValidaPossicao(pos);
+            validaPossicao(pos);
             return peca(pos) != null; // valida se a posicao existe e se existe peça na posicao informada 
         }
-        public Peca RetirarPeca(Posicao pos) 
+        public Peca retirarPeca(Posicao pos) 
         {
             if (peca(pos) == null)
             {
@@ -62,7 +62,7 @@ namespace Xadrez_Game.Tabuleiro
             }
             Peca aux = peca(pos);
             aux.posicao = null;
-            pecas[pos.Linha, pos.Coluna] = null;
+            pecas[pos.linha, pos.coluna] = null;
             return aux;
             
         }

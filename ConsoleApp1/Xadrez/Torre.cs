@@ -7,7 +7,7 @@ namespace Xadrez_Game.Xadrez
 {
     class Torre : Peca
     {
-        public Torre(Cores cor, TabuleiroDoJogo tab) : base(cor, tab)
+        public Torre(TabuleiroDoJogo tabuleiro, Cor cor) : base(tabuleiro, cor)
         {
 
         }
@@ -15,62 +15,62 @@ namespace Xadrez_Game.Xadrez
         private bool PodeMover(Posicao pos)
         {
             
-            Peca p = tabuleiro.RetornaPeca(pos.Linha, pos.Coluna);
+            Peca p = tab.retornaPeca(pos.linha, pos.coluna);
             return p == null || p.cor != this.cor; // valida se existe peça adversaria ou espaço em branco na posicao, se sim, pode mover 
         }
 
         public override bool[,] MovimentosPossieis()
         {
 
-            bool[,] matTemp = new bool[tabuleiro.linhas, tabuleiro.colunas];
+            bool[,] matTemp = new bool[tab.linhas, tab.colunas];
             Posicao pos = new Posicao(0, 0); //instanciada com valores irrelevantes apenas 
 
             //norte 
-            pos.DefinirValores(posicao.Linha - 1, posicao.Coluna); // define posiçao atual da peça e havalia as casas acima
-            while(tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            pos.definirValores(posicao.linha - 1, posicao.coluna); // define posiçao atual da peça e havalia as casas acima
+            while(tab.posicaoValida(pos) && PodeMover(pos))
             {
-                matTemp[pos.Linha, pos.Coluna] = true; // se a posicao for livre ou de peça de cor diferetente, ele pode continuar se movendo
-                if (tabuleiro.peca(pos) != null && tabuleiro.peca(pos).cor != this.cor)
+                matTemp[pos.linha, pos.coluna] = true; // se a posicao for livre ou de peça de cor diferetente, ele pode continuar se movendo
+                if (tab.peca(pos) != null && tab.peca(pos).cor != this.cor)
                 {
                     break; // interrompe a iteraçao após encontrar uma peça de outra cor 
                 }
-                pos.Linha = pos.Linha -1;
+                pos.linha = pos.linha -1;
             }
 
             // sul
-            pos.DefinirValores(posicao.Linha + 1, posicao.Coluna); // define posiçao atual da peça e havalia as casas acima
-            while (tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            pos.definirValores(posicao.linha + 1, posicao.coluna); // define posiçao atual da peça e havalia as casas acima
+            while (tab.posicaoValida(pos) && PodeMover(pos))
             {
-                matTemp[pos.Linha, pos.Coluna] = true; // se a posicao for livre ou de peça de cor diferetente, ele pode continuar se movendo
-                if (tabuleiro.peca(pos) != null && tabuleiro.peca(pos).cor != this.cor)
+                matTemp[pos.linha, pos.coluna] = true; // se a posicao for livre ou de peça de cor diferetente, ele pode continuar se movendo
+                if (tab.peca(pos) != null && tab.peca(pos).cor != this.cor)
                 {
                     break; // interrompe a iteraçao após encontrar uma peça de outra cor 
                 }
-                pos.Linha = pos.Linha + 1;
+                pos.linha = pos.linha + 1;
             }
 
             // leste 
-            pos.DefinirValores(posicao.Linha, posicao.Coluna + 1); // define posiçao atual da peça e havalia as casas acima
-            while (tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            pos.definirValores(posicao.linha, posicao.coluna + 1); // define posiçao atual da peça e havalia as casas acima
+            while (tab.posicaoValida(pos) && PodeMover(pos))
             {
-                matTemp[pos.Linha, pos.Coluna] = true; // se a posicao for livre ou de peça de cor diferetente, ele pode continuar se movendo
-                if (tabuleiro.peca(pos) != null && tabuleiro.peca(pos).cor != this.cor)
+                matTemp[pos.linha, pos.coluna] = true; // se a posicao for livre ou de peça de cor diferetente, ele pode continuar se movendo
+                if (tab.peca(pos) != null && tab.peca(pos).cor != this.cor)
                 {
                     break; // interrompe a iteraçao após encontrar uma peça de outra cor 
                 }
-                pos.Coluna = pos.Coluna + 1;
+                pos.coluna = pos.coluna + 1;
             }
 
             // oeste 
-            pos.DefinirValores(posicao.Linha, posicao.Coluna -1); // define posiçao atual da peça e havalia as casas acima
-            while (tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            pos.definirValores(posicao.linha, posicao.coluna -1); // define posiçao atual da peça e havalia as casas acima
+            while (tab.posicaoValida(pos) && PodeMover(pos))
             {
-                matTemp[pos.Linha, pos.Coluna] = true; // se a posicao for livre ou de peça de cor diferetente, ele pode continuar se movendo
-                if (tabuleiro.peca(pos) != null && tabuleiro.peca(pos).cor != this.cor)
+                matTemp[pos.linha, pos.coluna] = true; // se a posicao for livre ou de peça de cor diferetente, ele pode continuar se movendo
+                if (tab.peca(pos) != null && tab.peca(pos).cor != this.cor)
                 {
                     break; // interrompe a iteraçao após encontrar uma peça de outra cor 
                 }
-                pos.Coluna = pos.Coluna - 1;
+                pos.coluna = pos.coluna - 1;
             }
 
             return matTemp;

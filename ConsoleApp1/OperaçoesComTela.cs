@@ -15,7 +15,7 @@ namespace Xadrez_Game
                 Console.Write(8 - i + " ");
                 for (int j = 0; j < tab.colunas; j++)
                 {
-                    ImprimirPeca(tab.RetornaPeca(i, j));
+                    ImprimirPeca(tab.retornaPeca(i, j));
 
                 }
 
@@ -42,7 +42,7 @@ namespace Xadrez_Game
                         Console.BackgroundColor = fundoO;
                     }
 
-                    ImprimirPeca(tab.RetornaPeca(i, j));
+                    ImprimirPeca(tab.retornaPeca(i, j));
                     Console.BackgroundColor = fundoO;
                 }
 
@@ -61,7 +61,7 @@ namespace Xadrez_Game
             }
             else // se tiver peça na posicao informada, ela será impressa 
             {
-                if (peca.cor == Cores.Branca)
+                if (peca.cor == Cor.Branca)
                 {
 
                     Console.Write(peca);
@@ -84,7 +84,7 @@ namespace Xadrez_Game
             int linha = (int)Char.GetNumericValue(s[1]);
             return new PosicaoXadrex(coluna, linha); // converte as coordenas digitadas em coordenadas da matriz
         }
-        public static void ImprimePartida(PartidaDeXadres partida)
+        public static void ImprimirPartida(PartidaDeXadres partida)
         {
             Console.Clear();
             ImprimeTabuleiro(partida.tab);
@@ -107,11 +107,16 @@ namespace Xadrez_Game
         }
         public static void ImprimirPecasCapturadas(PartidaDeXadres partida)
         {
-            Console.WriteLine("Pecas Capturadas");
-            Console.WriteLine("Brancas:");
-            ImprimirConjunto(partida.PecasCapturadas(Cores.Branca));
-            Console.WriteLine("Pretas:");
-            ImprimirConjunto(partida.PecasCapturadas(Cores.Branca));
+            Console.WriteLine("Peças capturadas:");
+            Console.Write("Brancas: ");
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Branca));
+            Console.WriteLine();
+            Console.Write("Pretas: ");
+            ConsoleColor aux = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            ImprimirConjunto(partida.PecasCapturadas(Cor.Preta));
+            Console.ForegroundColor = aux;
+            Console.WriteLine();
         }
         public static void ImprimirConjunto(HashSet<Peca> conjunto)
         {

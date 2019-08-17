@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Xadrez_Game.Tabuleiro
 {
-    enum Cores
+    enum Cor
     {
         Branca,
         Preta,

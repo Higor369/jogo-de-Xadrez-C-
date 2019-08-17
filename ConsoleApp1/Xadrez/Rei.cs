@@ -7,72 +7,109 @@ namespace Xadrez_Game.Xadrez
 {
     class Rei : Peca
     {
-        public Rei( Cores cor , TabuleiroDoJogo tab) : base(cor, tab)
-        {
+        private PartidaDeXadres partida;
 
-        }
-        private bool PodeMover(Posicao pos)
+        public Rei(TabuleiroDoJogo tab, Cor cor, PartidaDeXadres partida) : base(tab, cor)
         {
-            Peca p = tabuleiro.RetornaPeca(pos.Linha, pos.Coluna);
+            this.partida = partida;
+        }
+        private bool podeMover(Posicao pos)
+        {
+            Peca p = tab.retornaPeca(pos.linha, pos.coluna);
             return p == null || p.cor != this.cor; //se a casa estiver vazia ou for peça de outra cor, pode mover 
+        }
+        private bool testeTorreParaRoque(Posicao pos)
+        {
+            Peca p = tab.peca(pos);
+            return p != null && p is Torre && p.cor == cor && p.qteMovimentos == 0;
         }
 
         public override bool[,] MovimentosPossieis()
         {
-         
-            bool[,] matTemp = new bool[tabuleiro.linhas, tabuleiro.colunas];
-            Posicao pos = new Posicao(0,0); // instancia obj posicao apenas 
 
-            //posicao norte 
-            pos.DefinirValores(posicao.Linha - 1, posicao.Coluna); // recupera a casa que será havaliada
-            if (tabuleiro.PosicaoValida(pos) && PodeMover(pos)) // se a casa estiver livre ou for uma peça de outra cor, pode mover 
-            {                                                // metódos e condicionais abaixo  apenas alteram a casa havaliada, mas a logica é a mesma 
-                matTemp[pos.Linha, pos.Coluna] = true;
-            }
-            // posicao nordeste
-            pos.DefinirValores(posicao.Linha - 1, posicao.Coluna + 1);
-            if (tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            bool[,] mat = new bool[tab.linhas, tab.colunas];
+
+            Posicao pos = new Posicao(0, 0);
+
+            // acima
+            pos.definirValores(posicao.linha - 1, posicao.coluna);
+            if (tab.posicaoValida(pos) && podeMover(pos))
             {
-                matTemp[pos.Linha, pos.Coluna] = true;
+                mat[pos.linha, pos.coluna] = true;
             }
-            // posicao leste
-            pos.DefinirValores(posicao.Linha, posicao.Coluna + 1);
-            if (tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            // ne
+            pos.definirValores(posicao.linha - 1, posicao.coluna + 1);
+            if (tab.posicaoValida(pos) && podeMover(pos))
             {
-                matTemp[pos.Linha, pos.Coluna] = true;
+                mat[pos.linha, pos.coluna] = true;
             }
-            //posicao sudeste 
-            pos.DefinirValores(posicao.Linha +1, posicao.Coluna +1 );
-            if (tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            // direita
+            pos.definirValores(posicao.linha, posicao.coluna + 1);
+            if (tab.posicaoValida(pos) && podeMover(pos))
             {
-                matTemp[pos.Linha, pos.Coluna] = true;
+                mat[pos.linha, pos.coluna] = true;
             }
-            // posicao sul 
-            pos.DefinirValores(posicao.Linha + 1, posicao.Coluna);
-            if (tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            // se
+            pos.definirValores(posicao.linha + 1, posicao.coluna + 1);
+            if (tab.posicaoValida(pos) && podeMover(pos))
             {
-                matTemp[pos.Linha, pos.Coluna] = true;
+                mat[pos.linha, pos.coluna] = true;
             }
-            // posicao sul doeste 
-            pos.DefinirValores(posicao.Linha + 1, posicao.Coluna -1);
-            if (tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            // abaixo
+            pos.definirValores(posicao.linha + 1, posicao.coluna);
+            if (tab.posicaoValida(pos) && podeMover(pos))
             {
-                matTemp[pos.Linha, pos.Coluna] = true;
+                mat[pos.linha, pos.coluna] = true;
             }
-            // posicao oeste
-            pos.DefinirValores(posicao.Linha, posicao.Coluna -1);
-            if (tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            // so
+            pos.definirValores(posicao.linha + 1, posicao.coluna - 1);
+            if (tab.posicaoValida(pos) && podeMover(pos))
             {
-                matTemp[pos.Linha, pos.Coluna] = true;
+                mat[pos.linha, pos.coluna] = true;
             }
-            // posicao noroeste 
-            pos.DefinirValores(posicao.Linha - 1, posicao.Coluna -1);
-            if (tabuleiro.PosicaoValida(pos) && PodeMover(pos))
+            // esquerda
+            pos.definirValores(posicao.linha, posicao.coluna - 1);
+            if (tab.posicaoValida(pos) && podeMover(pos))
             {
-                matTemp[pos.Linha, pos.Coluna] = true;
+                mat[pos.linha, pos.coluna] = true;
+            }
+            // no
+            pos.definirValores(posicao.linha - 1, posicao.coluna - 1);
+            if (tab.posicaoValida(pos) && podeMover(pos))
+            {
+                mat[pos.linha, pos.coluna] = true;
             }
 
-            return matTemp;
+            // #jogadaespecial roque
+            if (qteMovimentos == 0 && !partida.xeque)
+            {
+                // #jogadaespecial roque pequeno
+                Posicao posT1 = new Posicao(posicao.linha, posicao.coluna + 3);
+                if (testeTorreParaRoque(posT1))
+                {
+                    Posicao p1 = new Posicao(posicao.linha, posicao.coluna + 1);
+                    Posicao p2 = new Posicao(posicao.linha, posicao.coluna + 2);
+                    if (tab.peca(p1) == null && tab.peca(p2) == null)
+                    {
+                        mat[posicao.linha, posicao.coluna + 2] = true;
+                    }
+                }
+                // #jogadaespecial roque grande
+                Posicao posT2 = new Posicao(posicao.linha, posicao.coluna - 4);
+                if (testeTorreParaRoque(posT2))
+                {
+                    Posicao p1 = new Posicao(posicao.linha, posicao.coluna - 1);
+                    Posicao p2 = new Posicao(posicao.linha, posicao.coluna - 2);
+                    Posicao p3 = new Posicao(posicao.linha, posicao.coluna - 3);
+                    if (tab.peca(p1) == null && tab.peca(p2) == null && tab.peca(p3) == null)
+                    {
+                        mat[posicao.linha, posicao.coluna - 2] = true;
+                    }
+                }
+            }
+
+
+            return mat;
         }
 
         public override string ToString()

@@ -14,42 +14,45 @@ namespace Xadrez_Game
 
                 while (!partida.terminada)
                 {
+
                     try
                     {
-                        OperaçoesComTela.ImprimePartida(partida);
+                        Console.Clear();
+                        OperaçoesComTela.ImprimirPartida(partida);
 
-                        Console.WriteLine("\n Digite a Peça de Origem: ");
+                        Console.WriteLine();
+                        Console.Write("Origem: ");
                         Posicao origem = OperaçoesComTela.LerPosicaoTeclado().ConvertePosicao();
-                        Console.WriteLine(origem);
                         partida.ValidarPosicaoOrigem(origem);
 
-
-                        bool[,] possicoesPossiceis = partida.tab.peca(origem).MovimentosPossieis();
+                        bool[,] posicoesPossiveis = partida.tab.peca(origem).MovimentosPossieis();
 
                         Console.Clear();
-                        OperaçoesComTela.ImprimeTabuleiro(partida.tab, possicoesPossiceis);
+                        OperaçoesComTela.ImprimeTabuleiro(partida.tab, posicoesPossiveis);
 
-                        Console.WriteLine("Digite a posição de Destino da Peça selecionada: ");
+                        Console.WriteLine();
+                        Console.Write("Destino: ");
                         Posicao destino = OperaçoesComTela.LerPosicaoTeclado().ConvertePosicao();
                         partida.ValidaPosicaoDestiono(origem, destino);
 
-                        partida.RealizaJogada(origem, destino);
+                        partida.realizaJogada(origem, destino);
                     }
-                    catch (TabuleiroExption e)
+                    catch (TabuleiroException e)
                     {
                         Console.WriteLine(e.Message);
-                        Console.WriteLine("Tecle enter para realizar uma nova jogada");
                         Console.ReadLine();
                     }
                 }
                 Console.Clear();
-                OperaçoesComTela.ImprimePartida(partida);
-
+                OperaçoesComTela.ImprimirPartida(partida);
             }
-            catch (TabuleiroExption e)
+            catch (TabuleiroException e)
             {
                 Console.WriteLine(e.Message);
             }
-        }
+
+            Console.ReadLine();
+        } 
+    
     }
 }
