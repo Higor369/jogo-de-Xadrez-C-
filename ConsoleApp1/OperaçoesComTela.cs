@@ -21,7 +21,7 @@ namespace Xadrez_Game
 
                 Console.WriteLine();
             }
-            Console.WriteLine("  a b c d e f g h");
+            Console.WriteLine("  a b c d e f g h \n");
         }
         public static void ImprimeTabuleiro(TabuleiroDoJogo tab, bool[,] posicoesPossiveis)// varre a matriz e imprime o tabuleiro com posicoes possiveis 
         {
@@ -91,6 +91,10 @@ namespace Xadrez_Game
             ImprimirPecasCapturadas(partida);
             Console.WriteLine();
             Console.WriteLine($" turno: {partida.turno} \n Jogador atual: {partida.jogadorAtual}");
+            if (partida.xeque)
+            {
+                Console.WriteLine("Xeque!");
+            }
         }
         public static void ImprimirPecasCapturadas(PartidaDeXadres partida)
         {
