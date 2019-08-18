@@ -79,7 +79,15 @@ namespace Xadrez_Game
         }
         public static PosicaoXadrex LerPosicaoTeclado()
         {
-            string s = Console.ReadLine();
+
+            string t = Console.ReadLine();
+            string s = t.ToLower();
+            int resultadoDaConvercao;
+            if (s[0].GetType() == typeof(char) || int.TryParse(s[1] + " ",out resultadoDaConvercao) || s.Length != 2)
+            {
+                throw new TabuleiroException("por favor, digite uma letra e um numero \n tecle enter para continuar");
+            }
+            
             char coluna = s[0];
             int linha = (int)Char.GetNumericValue(s[1]);
             return new PosicaoXadrex(coluna, linha); // converte as coordenas digitadas em coordenadas da matriz
@@ -110,13 +118,13 @@ namespace Xadrez_Game
             Console.WriteLine("Peças capturadas:");
             Console.Write("Brancas: ");
             ImprimirConjunto(partida.PecasCapturadas(Cor.Branca));
-            Console.WriteLine();
+            
             Console.Write("Pretas: ");
             ConsoleColor aux = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Yellow;
             ImprimirConjunto(partida.PecasCapturadas(Cor.Preta));
             Console.ForegroundColor = aux;
-            Console.WriteLine();
+            
         }
         public static void ImprimirConjunto(HashSet<Peca> conjunto)
         {

@@ -25,6 +25,8 @@ namespace Xadrez_Game
                         Posicao origem = OperaçoesComTela.LerPosicaoTeclado().ConvertePosicao();
                         partida.ValidarPosicaoOrigem(origem);
 
+                        
+
                         bool[,] posicoesPossiveis = partida.tab.peca(origem).MovimentosPossieis();
 
                         Console.Clear();

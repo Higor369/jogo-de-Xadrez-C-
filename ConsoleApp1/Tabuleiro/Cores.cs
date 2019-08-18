@@ -7,10 +7,7 @@ namespace Xadrez_Game.Tabuleiro
     enum Cor
     {
         Branca,
-        Preta,
-        Amarelo,
-        Azul,
-        Vermelho,
-        Marron
+        Preta
+        
     }
 }
